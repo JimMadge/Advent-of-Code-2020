@@ -10,9 +10,16 @@ def parse_line(line):
     return None
 
 
-def valid_password(minimum, maximum, character, password):
+def valid_password1(minimum, maximum, character, password):
     return minimum <= password.count(character) <= maximum
 
 
-def count_valid_passwords(lines):
-    return sum([valid_password(*parse_line(line)) for line in lines])
+def valid_password2(first_pos, second_pos, character, password):
+    a = password[first_pos-1] == character
+    b = password[second_pos-1] == character
+
+    return (a and not b) or (b and not a)
+
+
+def count_valid_passwords(validator, lines):
+    return sum([validator(*parse_line(line)) for line in lines])
