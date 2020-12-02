@@ -1,0 +1,22 @@
+---
+
+name: CI
+on: push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install
+        run: pip install .
+      - name: Install flake8 and pytest
+        run: pip install flake8 pytest
+      - name: Lint
+        run: poetry run flake8 --show-source
+      - name: Run tests
+        run: poetry run pytest -v
