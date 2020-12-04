@@ -1,4 +1,3 @@
-from string import hexdigits
 import re
 
 required_fields = [
@@ -37,6 +36,8 @@ height_range = {
     "in": (59, 76)
 }
 
+hair_colour = re.compile(r"#[0-9A-Fa-f]{6}")
+
 eye_colours = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
 
 passport_number = re.compile(r"\d{9}")
@@ -62,10 +63,7 @@ def valid_passport2(passport):
     else:
         return False
 
-    if passport["hcl"][0] == "#":
-        if not all([char in hexdigits for char in passport["hcl"][1:]]):
-            return False
-    else:
+    if not hair_colour.fullmatch(passport["hcl"]):
         return False
 
     if not passport["ecl"] in eye_colours:
