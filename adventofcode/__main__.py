@@ -1,6 +1,7 @@
 from .day1 import expense_report
 from .day2 import count_valid_passwords, valid_password1, valid_password2
 from .day3 import count_trees, compare_routes
+from .day4 import count_valid_passports
 from functools import reduce
 
 
@@ -22,6 +23,9 @@ def main():
         compare_routes(toboggan_map, [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)])
     )
     print(f"day 3 - part 2: {day3_part2}")
+
+    passports = open("./input/day4.txt").read()
+    print(f"day 4 - part 1: {count_valid_passports(passports)}")
 
 
 if __name__ == "__main__":
