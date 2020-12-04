@@ -1,7 +1,8 @@
 from .day1 import expense_report
 from .day2 import count_valid_passwords, valid_password1, valid_password2
 from .day3 import count_trees, compare_routes
-from .day4 import count_valid_passports
+from .day4 import (process_passports, count_valid_passports,
+                   count_valid_passports2)
 from functools import reduce
 
 
@@ -24,8 +25,9 @@ def main():
     )
     print(f"day 3 - part 2: {day3_part2}")
 
-    passports = open("./input/day4.txt").read()
+    passports = process_passports(open("./input/day4.txt").read())
     print(f"day 4 - part 1: {count_valid_passports(passports)}")
+    print(f"day 4 - part 2: {count_valid_passports2(passports)}")
 
 
 if __name__ == "__main__":
