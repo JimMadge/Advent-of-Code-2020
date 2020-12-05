@@ -3,6 +3,7 @@ from .day2 import count_valid_passwords, valid_password1, valid_password2
 from .day3 import count_trees, compare_routes
 from .day4 import (process_passports, count_valid_passports,
                    count_valid_passports2)
+from .day5 import seat_number, seat_id,  my_seat
 from functools import reduce
 
 
@@ -28,6 +29,11 @@ def main():
     passports = process_passports(open("./input/day4.txt").read())
     print(f"day 4 - part 1: {count_valid_passports(passports)}")
     print(f"day 4 - part 2: {count_valid_passports2(passports)}")
+
+    boarding_passes = open("./input/day5.txt").read().splitlines()
+    print("day 5 - part 1: "
+          f"{max([seat_id(*seat_number(seat)) for seat in boarding_passes])}")
+    print(f"day 5 - part 2: {my_seat(boarding_passes)}")
 
 
 if __name__ == "__main__":
