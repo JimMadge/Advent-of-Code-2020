@@ -20,8 +20,8 @@ test_data = dedent("""\
 
 
 def test_count_any_affirmative():
-    assert count_any_affirmative(test_data) == 11
+    assert count_any_affirmative(test_data.split("\n\n")) == 11
 
 
 def test_count_all_affirmative():
-    assert count_all_affirmative(test_data) == 6
+    assert count_all_affirmative(test_data.split("\n\n")) == 6
