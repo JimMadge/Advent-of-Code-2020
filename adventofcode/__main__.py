@@ -5,6 +5,7 @@ from .day4 import (process_passports, count_valid_passports,
                    count_valid_passports2)
 from .day5 import seat_number, seat_id,  my_seat
 from .day6 import count_any_affirmative, count_all_affirmative
+from .day7 import build_tree, build_nodes, count_contains_shiny_gold
 from functools import reduce
 
 
@@ -39,6 +40,10 @@ def main():
     groups_answers = open("./input/day6.txt").read().split("\n\n")
     print(f"day 6 - part 1: {count_any_affirmative(groups_answers)}")
     print(f"day 6 - part 2: {count_all_affirmative(groups_answers)}")
+
+    bags = open("./input/day7.txt").read()
+    nodes = build_tree(bags, build_nodes(bags))
+    print(f"day 7 - part 1: {count_contains_shiny_gold(nodes)}")
 
 
 if __name__ == "__main__":
