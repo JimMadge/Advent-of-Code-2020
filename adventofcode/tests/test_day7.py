@@ -47,3 +47,7 @@ def test_contains_shiny_gold(test_tree):
 
 def test_count_contains_shiny_gold(test_tree):
     assert count_contains_shiny_gold(test_tree) == 4
+
+
+def test_total_children(test_tree):
+    assert test_tree["shiny gold"].total_children() == 32

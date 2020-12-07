@@ -5,9 +5,11 @@ class TreeNode(object):
     def __init__(self, name):
         self.name = name
         self.children = []
+        self.n_children = []
 
-    def add_child(self, child):
+    def add_child(self, child, number):
         self.children.append(child)
+        self.n_children.append(number)
 
     def contains_shiny_gold(self):
         if self.children == []:
@@ -18,16 +20,24 @@ class TreeNode(object):
 
         return any(child.contains_shiny_gold() for child in self.children)
 
+    def total_children(self):
+        if self.children == []:
+            return 0
+
+        return (
+            sum(self.n_children) +
+            sum([number * child.total_children()
+                 for number, child in zip(self.n_children, self.children)])
+        )
+
 
 parse_line = re.compile(r"([a-z]+ [a-z]+) bags contain (.*)")
 
 
 def build_nodes(text):
     nodes = {}
-    # print(text)
 
     for line in text.splitlines():
-        # print(line)
         match = parse_line.match(line)
 
         bag_name = match.group(1)
@@ -35,7 +45,7 @@ def build_nodes(text):
     return nodes
 
 
-parse_contents = re.compile(r"([a-z]+ [a-z]+) bags{0,1}[.,]")
+parse_contents = re.compile(r"(\d) ([a-z]+ [a-z]+) bags{0,1}[.,]")
 
 
 def build_tree(text, nodes):
@@ -43,15 +53,13 @@ def build_tree(text, nodes):
         match = parse_line.match(line)
 
         bag_name = match.group(1)
-        # print(match.group(2))
         if match.group(2) == "no other bags.":
             continue
         else:
             contains = parse_contents.findall(match.group(2))
-            # print(contains)
 
-            for child_bag in contains:
-                nodes[bag_name].add_child(nodes[child_bag])
+            for number, child_bag in contains:
+                nodes[bag_name].add_child(nodes[child_bag], int(number))
     return nodes
 
 

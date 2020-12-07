@@ -44,6 +44,7 @@ def main():
     bags = open("./input/day7.txt").read()
     nodes = build_tree(bags, build_nodes(bags))
     print(f"day 7 - part 1: {count_contains_shiny_gold(nodes)}")
+    print(f"day 7 - part 2: {nodes['shiny gold'].total_children()}")
 
 
 if __name__ == "__main__":
