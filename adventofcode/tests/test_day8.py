@@ -1,4 +1,4 @@
-from ..day8 import parse_instructions, execute
+from ..day8 import parse_instructions, flip_instruction, execute
 from textwrap import dedent
 
 test_data = dedent("""\
@@ -20,5 +20,18 @@ def test_parse_instructions():
     assert instructions[6] == ("acc", "+1")
 
 
+def test_flip_instruction():
+    instructions = parse_instructions(test_data)
+
+    assert flip_instruction(instructions[0]) == ("jmp", "+0")
+
+
 def test_execute():
-    assert execute(parse_instructions(test_data)) == (1, 5)
+    assert execute(parse_instructions(test_data)) == ("loop", 1, 5)
+
+
+def test_execute2():
+    instructions = parse_instructions(test_data)
+    instructions[-2] = flip_instruction(instructions[-2])
+
+    assert execute(instructions) == ("end", 9, 8)

@@ -6,7 +6,7 @@ from .day4 import (process_passports, count_valid_passports,
 from .day5 import seat_number, seat_id,  my_seat
 from .day6 import count_any_affirmative, count_all_affirmative
 from .day7 import build_tree, build_nodes, count_contains_shiny_gold
-from .day8 import parse_instructions, execute
+from .day8 import parse_instructions, execute, trial_flips
 from functools import reduce
 
 
@@ -48,7 +48,8 @@ def main():
     print(f"day 7 - part 2: {nodes['shiny gold'].total_children()}")
 
     instructions = parse_instructions(open("./input/day8.txt").read())
-    print(f"day 8 - part 1: {execute(instructions)[1]}")
+    print(f"day 8 - part 1: {execute(instructions)[2]}")
+    print(f"day 8 - part 2: {trial_flips(instructions)[2]}")
 
 
 if __name__ == "__main__":
