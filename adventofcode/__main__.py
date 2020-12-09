@@ -7,6 +7,7 @@ from .day5 import seat_number, seat_id,  my_seat
 from .day6 import count_any_affirmative, count_all_affirmative
 from .day7 import build_tree, build_nodes, count_contains_shiny_gold
 from .day8 import parse_instructions, execute, trial_flips
+from .day9 import first_invalid, weakness
 from functools import reduce
 
 
@@ -50,6 +51,10 @@ def main():
     instructions = parse_instructions(open("./input/day8.txt").read())
     print(f"day 8 - part 1: {execute(instructions)[2]}")
     print(f"day 8 - part 2: {trial_flips(instructions)[2]}")
+
+    sequence = [int(line) for line in open("./input/day9.txt").readlines()]
+    print(f"day 9 - part 1: {first_invalid(sequence)}")
+    print(f"day 9 - part 2: {weakness(first_invalid(sequence), sequence)}")
 
 
 if __name__ == "__main__":
