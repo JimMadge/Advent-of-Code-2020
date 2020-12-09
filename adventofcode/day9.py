@@ -26,8 +26,7 @@ def first_invalid(sequence, preamble=25):
 def weakness(target, sequence):
     n = len(sequence)
 
-    for i in range(0, n-1):
-        for j in range(i+1, n):
-            a = sequence[i:j+1]
-            if sum(a) == target:
-                return min(a) + max(a)
+    for (lower, upper) in combinations(range(n), 2):
+        sub_sequence = sequence[lower:upper+1]
+        if sum(sub_sequence) == target:
+            return min(sub_sequence) + max(sub_sequence)
