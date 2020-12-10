@@ -8,6 +8,7 @@ from .day6 import count_any_affirmative, count_all_affirmative
 from .day7 import build_tree, build_nodes, count_contains_shiny_gold
 from .day8 import parse_instructions, execute, trial_flips
 from .day9 import first_invalid, weakness
+from .day10 import pick_order, jump_product, count_routes
 from functools import reduce
 
 
@@ -55,6 +56,10 @@ def main():
     sequence = [int(line) for line in open("./input/day9.txt").readlines()]
     print(f"day 9 - part 1: {first_invalid(sequence)}")
     print(f"day 9 - part 2: {weakness(first_invalid(sequence), sequence)}")
+
+    adapters = [int(line) for line in open("./input/day10.txt").readlines()]
+    print(f"day 10 - part 1: {jump_product(pick_order(adapters))}")
+    print(f"day 10 - part 2: {count_routes(adapters)}")
 
 
 if __name__ == "__main__":
