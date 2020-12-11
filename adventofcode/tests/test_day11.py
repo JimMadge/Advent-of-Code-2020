@@ -1,5 +1,5 @@
 from ..day11 import (read_plan, create_neighbours, Seat, step, optimise,
-                     count_occupied)
+                     count_occupied, create_neighbours2)
 from textwrap import dedent
 
 
@@ -48,3 +48,11 @@ def test_optimise():
     optimise(seats)
 
     assert count_occupied(seats) == 37
+
+
+def test_optimise2():
+    seats = read_plan(test_plan)
+    create_neighbours2(seats)
+    optimise(seats, 5)
+
+    assert count_occupied(seats) == 26

@@ -48,7 +48,6 @@ def create_neighbours(seats):
 
     for i in range(height):
         for j in range(width):
-            # print(i, j)
             # Skip empty space
             if seats[i][j] is None:
                 continue
@@ -70,11 +69,46 @@ def create_neighbours(seats):
 
                 # Only add if neighbouring tile is a seat (not None)
                 if (neighbour := seats[ni][nj]):
-                    # print(neighbour)
                     seats[i][j].neighbours.append(neighbour)
 
 
-def step(seats):
+def create_neighbours2(seats):
+    height = len(seats)
+    width = len(seats[0])
+
+    for i in range(height):
+        for j in range(width):
+            # Skip empty space
+            if seats[i][j] is None:
+                continue
+
+            # Try each direction
+            for displacement in displacements:
+                # Look further until a neighbour is found
+                multiplier = 1
+                while True:
+                    ni = i + displacement[0]*multiplier
+                    nj = j + displacement[1]*multiplier
+
+                    # End if neighbouring tile is out of bounds
+                    if ni >= height:
+                        break
+                    if ni < 0:
+                        break
+                    if nj >= width:
+                        break
+                    if nj < 0:
+                        break
+
+                    # Only add if neighbouring tile is a seat (not None)
+                    if (neighbour := seats[ni][nj]):
+                        seats[i][j].neighbours.append(neighbour)
+                        break
+
+                    multiplier += 1
+
+
+def step(seats, visible=4):
     flipped = 0
 
     for seat in chain.from_iterable(seats):
@@ -82,7 +116,7 @@ def step(seats):
             continue
 
         if seat.occupied:
-            if seat.occupied_neighbours() >= 4:
+            if seat.occupied_neighbours() >= visible:
                 seat.pending_flip = True
         else:
             if seat.occupied_neighbours() == 0:
@@ -99,10 +133,10 @@ def step(seats):
     return flipped
 
 
-def optimise(seats):
+def optimise(seats, visible=4):
     flipped = 1
     while flipped != 0:
-        flipped = step(seats)
+        flipped = step(seats, visible)
 
 
 def count_occupied(seats):
@@ -120,5 +154,13 @@ def settle(plan):
     seats = read_plan(plan)
     create_neighbours(seats)
     optimise(seats)
+
+    return count_occupied(seats)
+
+
+def settle2(plan):
+    seats = read_plan(plan)
+    create_neighbours2(seats)
+    optimise(seats, 5)
 
     return count_occupied(seats)
