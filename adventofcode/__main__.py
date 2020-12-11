@@ -9,6 +9,7 @@ from .day7 import build_tree, build_nodes, count_contains_shiny_gold
 from .day8 import parse_instructions, execute, trial_flips
 from .day9 import first_invalid, weakness
 from .day10 import pick_order, jump_product, count_routes
+from .day11 import settle
 from functools import reduce
 
 
@@ -60,6 +61,9 @@ def main():
     adapters = [int(line) for line in open("./input/day10.txt").readlines()]
     print(f"day 10 - part 1: {jump_product(pick_order(adapters))}")
     print(f"day 10 - part 2: {count_routes(adapters)}")
+
+    plan = open("./input/day11.txt").read()
+    print(f"day 11 - part 1: {settle(plan)}")
 
 
 if __name__ == "__main__":
