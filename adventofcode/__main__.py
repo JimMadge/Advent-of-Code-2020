@@ -10,7 +10,7 @@ from .day8 import parse_instructions, execute, trial_flips
 from .day9 import first_invalid, weakness
 from .day10 import pick_order, jump_product, count_routes
 from .day11 import settle, settle2
-from .day12 import manhatten_distance, follow_route
+from .day12 import manhatten_distance, follow_route, follow_route2
 from functools import reduce
 
 
@@ -69,6 +69,7 @@ def main():
 
     route = open("./input/day12.txt").read()
     print(f"day 12 - part 1: {manhatten_distance(follow_route(route)[0])}")
+    print(f"day 12 - part 1: {manhatten_distance(follow_route2(route))}")
 
 
 if __name__ == "__main__":

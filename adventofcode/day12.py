@@ -72,3 +72,47 @@ def follow_route(route):
 
 def manhatten_distance(pos):
     return abs(pos[0]) + abs(pos[1])
+
+
+def turn2(waypoint, direction, degrees):
+    n_turns = degrees // 90
+
+    for i in range(n_turns):
+        if direction == "L":
+            waypoint = (waypoint[1], -waypoint[0])
+        if direction == "R":
+            waypoint = (-waypoint[1], waypoint[0])
+
+    return waypoint
+
+
+def forward2(pos, waypoint, distance):
+    return (pos[0]+waypoint[0]*distance, pos[1]+waypoint[1]*distance)
+
+
+def update_position2(instruction, pos, waypoint):
+    action, arg = instruction[0], int(instruction[1:])
+
+    if action == "N":
+        return pos, (waypoint[0]+arg, waypoint[1])
+    elif action == "S":
+        return pos, (waypoint[0]-arg, waypoint[1])
+    elif action == "E":
+        return pos, (waypoint[0], waypoint[1]+arg)
+    elif action == "W":
+        return pos, (waypoint[0], waypoint[1]-arg)
+    elif action == "L":
+        return pos, turn2(waypoint, "L", arg)
+    elif action == "R":
+        return pos, turn2(waypoint, "R", arg)
+    elif action == "F":
+        return forward2(pos, waypoint, arg), waypoint
+
+
+def follow_route2(route):
+    pos = (0, 0)
+    waypoint = (1, 10)
+    for instruction in route.splitlines():
+        pos, waypoint = update_position2(instruction, pos, waypoint)
+
+    return pos
