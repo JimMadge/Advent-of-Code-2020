@@ -8,6 +8,19 @@ class Direction(Enum):
     SOUTH = auto()
 
 
+def translate(pos, direction, distance):
+    if direction == "N":
+        pos = (pos[0]+distance, pos[1])
+    elif direction == "S":
+        pos = (pos[0]-distance, pos[1])
+    elif direction == "E":
+        pos = (pos[0], pos[1]+distance)
+    elif direction == "W":
+        pos = (pos[0], pos[1]-distance)
+
+    return pos
+
+
 def turn(heading, direction, degrees):
     turns = {
         "L": {
@@ -33,32 +46,28 @@ def turn(heading, direction, degrees):
 
 def forward(pos, heading, distance):
     if heading == Direction.EAST:
-        return (pos[0], pos[1]+distance)
+        pos = (pos[0], pos[1]+distance)
     elif heading == Direction.NORTH:
-        return (pos[0]+distance, pos[1])
+        pos = (pos[0]+distance, pos[1])
     elif heading == Direction.WEST:
-        return (pos[0], pos[1]-distance)
+        pos = (pos[0], pos[1]-distance)
     elif heading == Direction.SOUTH:
-        return (pos[0]-distance, pos[1])
+        pos = (pos[0]-distance, pos[1])
+
+    return pos
 
 
 def update_position(instruction, pos, heading):
     action, arg = instruction[0], int(instruction[1:])
 
-    if action == "N":
-        return (pos[0]+arg, pos[1]), heading
-    elif action == "S":
-        return (pos[0]-arg, pos[1]), heading
-    elif action == "E":
-        return (pos[0], pos[1]+arg), heading
-    elif action == "W":
-        return (pos[0], pos[1]-arg), heading
-    elif action == "L":
-        return pos, turn(heading, "L", arg)
-    elif action == "R":
-        return pos, turn(heading, "R", arg)
+    if action in ["N", "S", "E", "W"]:
+        pos = translate(pos, action, arg)
+    elif action in ["L", "R"]:
+        heading = turn(heading, action, arg)
     elif action == "F":
-        return forward(pos, heading, arg), heading
+        pos = forward(pos, heading, arg)
+
+    return pos, heading
 
 
 def follow_route(route):
@@ -70,11 +79,11 @@ def follow_route(route):
     return pos, heading
 
 
-def manhatten_distance(pos):
+def manhattan_distance(pos):
     return abs(pos[0]) + abs(pos[1])
 
 
-def turn2(waypoint, direction, degrees):
+def rotate(waypoint, direction, degrees):
     n_turns = degrees // 90
 
     for i in range(n_turns):
@@ -93,20 +102,14 @@ def forward2(pos, waypoint, distance):
 def update_position2(instruction, pos, waypoint):
     action, arg = instruction[0], int(instruction[1:])
 
-    if action == "N":
-        return pos, (waypoint[0]+arg, waypoint[1])
-    elif action == "S":
-        return pos, (waypoint[0]-arg, waypoint[1])
-    elif action == "E":
-        return pos, (waypoint[0], waypoint[1]+arg)
-    elif action == "W":
-        return pos, (waypoint[0], waypoint[1]-arg)
-    elif action == "L":
-        return pos, turn2(waypoint, "L", arg)
-    elif action == "R":
-        return pos, turn2(waypoint, "R", arg)
+    if action in ["N", "S", "E", "W"]:
+        waypoint = translate(waypoint, action, arg)
+    elif action in ["L", "R"]:
+        waypoint = rotate(waypoint, action, arg)
     elif action == "F":
-        return forward2(pos, waypoint, arg), waypoint
+        pos = forward2(pos, waypoint, arg)
+
+    return pos, waypoint
 
 
 def follow_route2(route):

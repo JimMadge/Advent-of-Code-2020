@@ -1,4 +1,4 @@
-from ..day12 import (Direction, turn, follow_route, manhatten_distance, turn2,
+from ..day12 import (Direction, turn, follow_route, manhattan_distance, rotate,
                      follow_route2)
 from textwrap import dedent
 import pytest
@@ -28,7 +28,7 @@ def test_follow_route():
     pos, _ = follow_route(test_route)
 
     assert pos == (-8, 17)
-    assert manhatten_distance(pos) == 25
+    assert manhattan_distance(pos) == 25
 
 
 @pytest.mark.parametrize(
@@ -37,11 +37,12 @@ def test_follow_route():
         ((4, 10), "R", 90, (-10, 4)),
     ]
 )
-def test_turn2(waypoint, direction, degrees, expected):
-    assert turn2(waypoint, direction, degrees) == expected
+def test_rotate(waypoint, direction, degrees, expected):
+    assert rotate(waypoint, direction, degrees) == expected
 
 
 def test_follow_route2():
     pos = follow_route2(test_route)
 
     assert pos == (-72, 214)
+    assert manhattan_distance(pos) == 286
