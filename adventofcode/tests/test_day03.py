@@ -1,4 +1,4 @@
-from ..day3 import count_trees, compare_routes
+from ..day03 import count_trees, compare_routes
 from textwrap import dedent
 
 test_map = dedent(

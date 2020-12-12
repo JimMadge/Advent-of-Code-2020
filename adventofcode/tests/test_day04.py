@@ -1,5 +1,5 @@
-from ..day4 import (process_passports, count_valid_passports,
-                    valid_passport2, count_valid_passports2)
+from ..day04 import (process_passports, count_valid_passports,
+                     valid_passport2, count_valid_passports2)
 from textwrap import dedent
 
 test_data = dedent("""

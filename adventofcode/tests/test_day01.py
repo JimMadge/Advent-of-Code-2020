@@ -1,5 +1,5 @@
 import pytest
-from ..day1 import expense_report
+from ..day01 import expense_report
 
 test_entries = [1721, 979, 366, 299, 675, 1456]
 test_data = [

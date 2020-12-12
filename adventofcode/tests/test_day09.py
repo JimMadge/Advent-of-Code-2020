@@ -1,4 +1,4 @@
-from ..day9 import find_sum, first_invalid, weakness
+from ..day09 import find_sum, first_invalid, weakness
 import pytest
 
 test_sequence = [

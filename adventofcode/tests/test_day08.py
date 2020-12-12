@@ -1,4 +1,4 @@
-from ..day8 import parse_instructions, flip_instruction, execute
+from ..day08 import parse_instructions, flip_instruction, execute
 from textwrap import dedent
 
 test_data = dedent("""\

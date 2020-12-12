@@ -1,4 +1,4 @@
-from ..day7 import build_tree, build_nodes, count_contains_shiny_gold
+from ..day07 import build_tree, build_nodes, count_contains_shiny_gold
 import pytest
 from textwrap import dedent
 

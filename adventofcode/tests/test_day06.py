@@ -1,4 +1,4 @@
-from ..day6 import count_any_affirmative, count_all_affirmative
+from ..day06 import count_any_affirmative, count_all_affirmative
 from textwrap import dedent
 
 test_data = dedent("""\

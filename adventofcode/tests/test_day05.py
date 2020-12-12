@@ -1,4 +1,4 @@
-from ..day5 import seat_number, seat_id
+from ..day05 import seat_number, seat_id
 import pytest
 
 

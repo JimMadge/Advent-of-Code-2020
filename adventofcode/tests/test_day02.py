@@ -1,4 +1,4 @@
-from ..day2 import (parse_line, valid_password1, valid_password2,
+from ..day02 import (parse_line, valid_password1, valid_password2,
                     count_valid_passwords)
 import pytest
 
