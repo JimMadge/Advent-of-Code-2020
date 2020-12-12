@@ -1,5 +1,5 @@
 from ..day02 import (parse_line, valid_password1, valid_password2,
-                    count_valid_passwords)
+                     count_valid_passwords)
 import pytest
 
 test_lines = [
