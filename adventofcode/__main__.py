@@ -11,6 +11,7 @@ from .day09 import first_invalid, weakness
 from .day10 import pick_order, jump_product, count_routes
 from .day11 import settle, settle2
 from .day12 import manhattan_distance, follow_route, follow_route2
+from .day13 import parse_bus_info, earliest_bus
 from functools import reduce
 
 
@@ -70,6 +71,10 @@ def main():
     route = open("./input/day12.txt").read()
     print(f"day 12 - part 1: {manhattan_distance(follow_route(route)[0])}")
     print(f"day 12 - part 2: {manhattan_distance(follow_route2(route))}")
+
+    start_time, bus_ids = parse_bus_info(open("./input/day13.txt").read())
+    time, bus = earliest_bus(start_time, bus_ids)
+    print(f"day 13 - part 1: {(time - start_time) * bus}")
 
 
 if __name__ == "__main__":
