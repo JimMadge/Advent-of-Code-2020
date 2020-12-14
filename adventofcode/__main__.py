@@ -12,7 +12,7 @@ from .day10 import pick_order, jump_product, count_routes
 from .day11 import settle, settle2
 from .day12 import manhattan_distance, follow_route, follow_route2
 from .day13 import parse_bus_info, earliest_bus
-from .day14 import execute_program
+from .day14 import execute_program, execute_program2
 from functools import reduce
 
 
@@ -79,6 +79,7 @@ def main():
 
     program = open("./input/day14.txt").read()
     print(f"day 14 - part 1: {sum(execute_program(program).values())}")
+    print(f"day 14 - part 2: {sum(execute_program2(program).values())}")
 
 
 if __name__ == "__main__":
