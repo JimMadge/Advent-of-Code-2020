@@ -12,6 +12,7 @@ from .day10 import pick_order, jump_product, count_routes
 from .day11 import settle, settle2
 from .day12 import manhattan_distance, follow_route, follow_route2
 from .day13 import parse_bus_info, earliest_bus
+from .day14 import execute_program
 from functools import reduce
 
 
@@ -75,6 +76,9 @@ def main():
     start_time, bus_ids = parse_bus_info(open("./input/day13.txt").read())
     time, bus = earliest_bus(start_time, bus_ids)
     print(f"day 13 - part 1: {(time - start_time) * bus}")
+
+    program = open("./input/day14.txt").read()
+    print(f"day 14 - part 1: {sum(execute_program(program).values())}")
 
 
 if __name__ == "__main__":
