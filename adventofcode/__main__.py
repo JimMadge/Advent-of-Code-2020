@@ -83,6 +83,8 @@ def main():
     print(f"day 14 - part 2: {sum(execute_program2(program).values())}")
 
     print(f"day 15 - part 1: {memory_game([1, 2, 16, 19, 18, 0])}")
+    print("day 15 - part 2: "
+          f"{memory_game([1, 2, 16, 19, 18, 0], end_turn=30_000_000)}")
 
 
 if __name__ == "__main__":

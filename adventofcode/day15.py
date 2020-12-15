@@ -4,13 +4,12 @@ def memory_game(starting_numbers, end_turn=2020):
     numbers = dict()
 
     # Initialise using starting numbers
-    for turn, number in enumerate(starting_numbers, start=1):
-        numbers[number] = ([turn], True)
+    numbers = {number: ([turn], True)
+               for turn, number in enumerate(starting_numbers, start=1)}
 
     # Play the game
-    turn += 1
     last_number = starting_numbers[-1]
-    for turn in range(turn, end_turn+1):
+    for turn in range(len(numbers)+1, end_turn+1):
         turns_said, first_occurance = numbers[last_number]
 
         if first_occurance:
@@ -23,13 +22,14 @@ def memory_game(starting_numbers, end_turn=2020):
             current_number = (turn-1) - turns_said[-2]
 
         if current_number in numbers.keys():
-            # Update an existing occurance
-            numbers[current_number] = (numbers[current_number][0]+[turn],
+            # Update an existing occurrence
+            numbers[current_number] = (numbers[current_number][0][-1:]+[turn],
                                        False)
         else:
             # Add a new occurrence to the record
             numbers[current_number] = ([turn], True)
 
+        # print(turn, current_number)
         last_number = current_number
 
     return current_number
