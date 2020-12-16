@@ -14,6 +14,7 @@ from .day12 import manhattan_distance, follow_route, follow_route2
 from .day13 import parse_bus_info, earliest_bus
 from .day14 import execute_program, execute_program2
 from .day15 import memory_game
+from .day16 import completely_invalid, parse_ticket, create_rule
 import argparse
 from functools import reduce
 
@@ -127,6 +128,16 @@ def day15():
                  memory_game([1, 2, 16, 19, 18, 0], end_turn=30_000_000))
 
 
+def day16():
+    rules = [create_rule(line) for line in
+             open("./input/day16_rules.txt").readlines()]
+    tickets = [parse_ticket(line) for line in
+               open("./input/day16_tickets.txt").readlines()]
+    # my_ticket = tickets[0]
+    nearby_tickets = tickets[1:]
+    print_result(16, 1, sum(completely_invalid(rules, nearby_tickets)))
+
+
 def main():
     parser = argparse.ArgumentParser(description="Advent of Code 2020")
     parser.add_argument("--last", action="store_true")
@@ -147,6 +158,7 @@ def main():
         day13,
         day14,
         day15,
+        day16,
     ]
 
     if args.last:
