@@ -14,7 +14,7 @@ from .day12 import manhattan_distance, follow_route, follow_route2
 from .day13 import parse_bus_info, earliest_bus
 from .day14 import execute_program, execute_program2
 from .day15 import memory_game
-from .day16 import completely_invalid, parse_ticket, create_rule
+from .day16 import completely_invalid, parse_ticket, create_rule, part2
 import argparse
 from functools import reduce
 
@@ -133,9 +133,10 @@ def day16():
              open("./input/day16_rules.txt").readlines()]
     tickets = [parse_ticket(line) for line in
                open("./input/day16_tickets.txt").readlines()]
-    # my_ticket = tickets[0]
+    my_ticket = tickets[0]
     nearby_tickets = tickets[1:]
     print_result(16, 1, sum(completely_invalid(rules, nearby_tickets)))
+    print_result(16, 1, part2(rules, nearby_tickets, my_ticket))
 
 
 def main():

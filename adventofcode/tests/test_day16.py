@@ -1,4 +1,5 @@
-from ..day16 import create_rule, parse_ticket, completely_invalid
+from ..day16 import (create_rule, parse_ticket, completely_invalid,
+                     discard_invalid)
 from textwrap import dedent
 import pytest
 
@@ -73,3 +74,31 @@ def test_completely_invalid(rules, tickets):
     assert 4 in invalid
     assert 55 in invalid
     assert 12 in invalid
+
+
+def test_discard_invalid(rules, tickets):
+    valid = discard_invalid(tickets, rules)
+
+    assert len(valid) == 1
+    assert valid[0] == [7, 3, 47]
+
+
+example_rules2 = dedent("""\
+    class: 0-1 or 4-19
+    row: 0-5 or 8-19
+    seat: 0-13 or 16-19""")
+
+example_nearby2 = dedent("""\
+    3,9,18
+    15,1,5
+    5,14,9""")
+
+
+@pytest.fixture()
+def rules2():
+    return [create_rule(line) for line in example_rules2.splitlines()]
+
+
+@pytest.fixture()
+def tickets2():
+    return [parse_ticket(line) for line in example_nearby2.splitlines()]
